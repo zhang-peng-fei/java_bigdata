@@ -22,7 +22,7 @@ public class TableDataDemo1 {
              Admin admin = connection.getAdmin()) {
             HTable table = new HTable(hbaseConfig, "tb1");
 
-//            insertData(table);
+            insertData(table);
             selectData(table);
         }
     }
@@ -44,13 +44,24 @@ public class TableDataDemo1 {
 
     private static void insertData(HTable table) throws IOException {
 
+        String rowKey = "rowKey";
+        String family = "f1";
 
-        byte[] CF = "f1".getBytes();
+        for (int i = 0; i < 50; i++) {
+            Put put = new Put(Bytes.toBytes(rowKey + i));
+
+            for (int j = 0; j < 10; j++) {
+                put.add(family.getBytes(), Bytes.toBytes(rowKey + i + "-key" + j),Bytes.toBytes(rowKey+i + "-value"+j));
+            }
+            table.put(put);
+        }
+
+       /* byte[] CF = "f1".getBytes();
         byte[] ATTR = "rowKey1-key2".getBytes();
 
         Put put = new Put(Bytes.toBytes("rowKey1"));
         put.add(CF, ATTR, Bytes.toBytes("rowKey1-value2"));
-        table.put(put);
+        table.put(put);*/
     }
 
 }
