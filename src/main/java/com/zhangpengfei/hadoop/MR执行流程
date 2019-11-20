@@ -1,0 +1,2 @@
+map：分区partitioner-排序sort-合并combiner
+reduce：分组-排序-二次排序
