@@ -104,12 +104,6 @@
             <artifactId>hbase-server</artifactId>
             <version>${hbase.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.hbase/hbase-mapreduce -->
-        <dependency>
-            <groupId>org.apache.hbase</groupId>
-            <artifactId>hbase-mapreduce</artifactId>
-            <version>${hbase.version}</version>
-        </dependency>
 
 
         <!-- https://mvnrepository.com/artifact/com.codahale.metrics/metrics-core -->

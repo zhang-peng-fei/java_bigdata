@@ -1,19 +1,18 @@
 package com.zhangpengfei.hbase;
 
-import com.zhangpengfei.util.CommUtils;
 import com.zhangpengfei.util.HbaseUtil;
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.hbase.*;
+import org.apache.hadoop.hbase.HColumnDescriptor;
+import org.apache.hadoop.hbase.HConstants;
+import org.apache.hadoop.hbase.HTableDescriptor;
+import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.Admin;
 import org.apache.hadoop.hbase.client.Connection;
 import org.apache.hadoop.hbase.client.ConnectionFactory;
 import org.apache.hadoop.hbase.io.compress.Compression;
 import org.apache.hadoop.hbase.util.RegionSplitter;
-import org.junit.Test;
 
 import java.io.IOException;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -138,7 +137,7 @@ public class TableSchemaDemo1 {
                 .setCompressionType(Compression.Algorithm.NONE));
         // 预设 region 数量 和 region 算法
         table.setRegionReplication(2);
-//        table.setRegionSplitPolicyClassName(RegionSplitter.UniformSplit.class.getName());
+        table.setRegionSplitPolicyClassName(RegionSplitter.UniformSplit.class.getName());
 
         System.out.print("Creating table Start");
         createOrOverwrite(admin, table);

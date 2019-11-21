@@ -1,4 +1,4 @@
-package com.zhangpengfei.flink.flink.demo;
+package com.zhangpengfei.flink.demo;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
