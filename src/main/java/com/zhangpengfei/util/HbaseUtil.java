@@ -3,6 +3,9 @@ package com.zhangpengfei.util;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 
+/**
+ * @author 张朋飞
+ */
 public class HbaseUtil {
 
     public  static Configuration getHbaseConfig() {

@@ -21,6 +21,8 @@
         <hadoop.version>2.7.5</hadoop.version>
         <storm.version>2.0.0</storm.version>
         <hbase.version>1.2.0</hbase.version>
+        <kafka.version>0.10.2.2</kafka.version>
+        <storm.scope>provided</storm.scope>
     </properties>
 
     <!--thymeleaf前端页面依赖-->
@@ -90,8 +92,35 @@
             <groupId>org.apache.storm</groupId>
             <artifactId>storm-core</artifactId>
             <version>${storm.version}</version>
-            <!--<scope>provided</scope>-->
+            <scope>${storm.scope}</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.storm/storm-kafka -->
+        <dependency>
+            <groupId>org.apache.storm</groupId>
+            <artifactId>storm-kafka</artifactId>
+            <version>${storm.version}</version>
+            <scope>${storm.scope}</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.storm</groupId>
+            <artifactId>storm-kafka-client</artifactId>
+            <version>${storm.version}</version>
+            <scope>${storm.scope}</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.storm</groupId>
+            <artifactId>storm-kafka-client-examples</artifactId>
+            <version>${storm.version}</version>
+            <scope>${storm.scope}</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients -->
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>${kafka.version}</version>
+        </dependency>
+
+
         <!-- hbase-client 依赖 https://mvnrepository.com/artifact/org.apache.hbase/hbase-client -->
         <dependency>
             <groupId>org.apache.hbase</groupId>

@@ -23,11 +23,11 @@ public class TableSchemaDemo1 {
     /**
      * 表名
      */
-    private static final String TABLE_NAME = "MY_TABLE_NAME_TOO";
+    private static final String TABLE_NAME = "tb1";
     /**
      * 列族名
      */
-    private static final String CF_DEFAULT = "DEFAULT_COLUMN_FAMILY";
+    private static final String CF_DEFAULT = "f1";
 
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
 
@@ -35,13 +35,12 @@ public class TableSchemaDemo1 {
 
         try (Connection connection = ConnectionFactory.createConnection(hbaseConfig);
              Admin admin = connection.getAdmin()) {
-
             // 建表
 //            createSchemaTables(admin);
             // 修改表结构（列族和版本）
 //            modifySchema(admin);
             // 查看表结构
-            describeTable(admin, "app_second_card_trmnl_info_m_hbase_new_fenqu2");
+            describeTable(admin, "tb1");
             // 列出所有表
             listTable(admin);
             // 删表
@@ -56,7 +55,6 @@ public class TableSchemaDemo1 {
         System.err.println("disable table is success");
         admin.deleteTable(table);
         System.err.println("drop table is success");
-
     }
 
     private static void describeTable(Admin admin, String tableName) throws IOException {
@@ -99,7 +97,6 @@ public class TableSchemaDemo1 {
         }
         // 创建表对象
         HTableDescriptor table = admin.getTableDescriptor(tableName);
-
         // 创建列族对象
         HColumnDescriptor newColumn = new HColumnDescriptor("NEWCF");
         // 设置压缩格式
@@ -108,28 +105,21 @@ public class TableSchemaDemo1 {
         newColumn.setMaxVersions(HConstants.ALL_VERSIONS);
         // 新增表列族
         admin.addColumn(tableName, newColumn);
-
         // 修改存在 column family 的压缩格式和版本
         HColumnDescriptor existingColumn = new HColumnDescriptor(CF_DEFAULT);
         existingColumn.setCompactionCompressionType(Compression.Algorithm.GZ);
         existingColumn.setMaxVersions(HConstants.ALL_VERSIONS);
         table.modifyFamily(existingColumn);
         admin.modifyTable(tableName, table);
-
         // Disable an existing table
         admin.disableTable(tableName);
-
         // Delete an existing column family
         admin.deleteColumn(tableName, CF_DEFAULT.getBytes("UTF-8"));
-
         // Delete a table (Need to be disabled first)
         admin.deleteTable(tableName);
-
-
     }
 
     private static void createSchemaTables(Admin admin) throws IOException {
-
         // 设置 table name
         HTableDescriptor table = new HTableDescriptor(TableName.valueOf(TABLE_NAME));
         // 设置 列族，压缩
@@ -140,12 +130,6 @@ public class TableSchemaDemo1 {
         table.setRegionSplitPolicyClassName(RegionSplitter.UniformSplit.class.getName());
 
         System.out.print("Creating table Start");
-        createOrOverwrite(admin, table);
-        System.out.println("Create table Done");
-
-    }
-
-    private static void createOrOverwrite(Admin admin, HTableDescriptor table) throws IOException {
         // 如果表存在，先 disable 表，在 delete 表
         if (admin.tableExists(table.getTableName())) {
             admin.disableTable(table.getTableName());
@@ -153,5 +137,7 @@ public class TableSchemaDemo1 {
         }
         // 实际的创建表函数
         admin.createTable(table);
+        System.out.println("Create table Done");
     }
+
 }
