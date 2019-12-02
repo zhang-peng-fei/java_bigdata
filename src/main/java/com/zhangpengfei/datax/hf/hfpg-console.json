@@ -1,0 +1,41 @@
+{
+  "job": {
+    "content": [
+      {
+        "reader": {
+          "name": "postgresqlreader",
+          "parameter": {
+            "connection": [
+              {
+                "jdbcUrl": [
+                  "jdbc:postgresql://192.168.128.131:5432/gptest"
+                ],
+                "table": [
+                  "dop_api_s"
+                ]
+              }
+            ],
+            "password": "gpadmin",
+            "username": "gpadmin",
+            "column": [
+              "s_id",
+              "s_name"
+            ]
+          }
+        },
+        "writer": {
+          "name": "streamwriter",
+          "parameter": {
+            "encoding": "utf-8",
+            "print": true
+          }
+        }
+      }
+    ],
+    "setting": {
+      "speed": {
+        "channel": "2"
+      }
+    }
+  }
+}

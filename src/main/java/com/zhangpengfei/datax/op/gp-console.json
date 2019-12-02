@@ -1,0 +1,70 @@
+{
+  "job": {
+    "content": [
+      {
+        "reader": {
+          "name": "postgresqlreader",
+          "parameter": {
+            "connection": [
+              {
+                "jdbcUrl": [
+                  "jdbc:postgresql://10.142.101.22:5432/dop"
+                ],
+                "table": [
+                  "dop_mon_api_call_log_201910"
+                ]
+              }
+            ],
+            "username": "dop",
+            "password": "tydiC&Jcnl2019",
+            "column": [
+              "s_id",
+              "api_type",
+              "user_id",
+              "seq_id",
+              "call_ip",
+              "user_agent",
+              "request_param",
+              "request_size",
+              "response_param",
+              "response_size",
+              "request_received_time",
+              "request_forward_time",
+              "response_received_time",
+              "response_forward_time",
+              "method",
+              "host",
+              "uri",
+              "result_flag",
+              "package_id",
+              "dcoos_api_id",
+              "err_level",
+              "gateway_business_response_code",
+              "gateway_response_code",
+              "business_response_code",
+              "backend_response_code",
+              "day_id",
+              "hour_id",
+              "raw_data",
+              "trace_id",
+              "month_id"
+            ],
+            "where": "s_id = 0 and user_id = 617"
+          }
+        },
+        "writer": {
+          "name": "streamwriter",
+          "parameter": {
+            "encoding": "utf-8",
+            "print": true
+          }
+        }
+      }
+    ],
+    "setting": {
+      "speed": {
+        "channel": "2"
+      }
+    }
+  }
+}

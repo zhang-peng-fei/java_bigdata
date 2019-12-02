@@ -1,0 +1,284 @@
+{
+  "job": {
+    "content": [
+      {
+        "reader": {
+          "name": "mysqlreader",
+          "parameter": {
+            "column": [
+              "S_ID",
+              "S_NAME",
+              "TOP_TYPE_ID",
+              "TYPE_ID",
+              "S_SRC",
+              "S_CODE",
+              "SERVICE_URL",
+              "MODEL_ID",
+              "QUERY_TYPE",
+              "FMT_TYPE",
+              "SYS_ID",
+              "PROT_ID",
+              "IF_MSG_SWITCH",
+              "STATUS",
+              "S_LEVEL",
+              "S_DESC",
+              "PRODUCT_DESC",
+              "CLUSERT_ID",
+              "ORDER_NUM",
+              "CALL_SUM",
+              "CALL_SUM_UPT_DATE",
+              "CALL_SUM_DCOOS",
+              "S_LOGO",
+              "ONLINE_DATE",
+              "ONLINE_DESC",
+              "REMOVE_DATE",
+              "REMOVE_DESC",
+              "HOT_LEVEL",
+              "FAVORITE_NUM",
+              "ORDER_CODE",
+              "CRT_USER_ID",
+              "CRT_USER_NAME",
+              "CRT_DATE",
+              "DEV_TYPE",
+              "LEVEL_TYPE",
+              "LEVEL_FLAG",
+              "IS_ENCRYPT",
+              "PROCESS_INSTANCE_ID",
+              "PROCESS_INSTANCE_TYPE",
+              "PROCESS_CREATE_TIME",
+              "PROCESS_BUSINESSJSON",
+              "ENVIRONMENT",
+              "TENANT_ID",
+              "PROJECT_ID",
+              "ROLE_ID",
+              "TIME_OUT"
+            ],
+            "connection": [
+              {
+                "jdbcUrl": [
+                  "jdbc:mysql://10.142.101.136:3306/dop"
+                ],
+                "table": [
+                  "dop_api_s"
+                ]
+              }
+            ],
+            "username": "dop",
+            "password": "tydiC#_2019Jcnla"
+          }
+        },
+        "writer": {
+          "name": "hdfswriter",
+          "parameter": {
+            "column": [
+              {
+                "name": "S_ID",
+                "type": "BIGINT"
+              },
+              {
+                "name": "S_NAME",
+                "type": "STRING"
+              },
+              {
+                "name": "TOP_TYPE_ID",
+                "type": "bigint"
+              },
+              {
+                "name": "TYPE_ID",
+                "type": "bigint"
+              },
+              {
+                "name": "S_SRC",
+                "type": "int"
+              },
+              {
+                "name": "S_CODE",
+                "type": "STRING"
+              },
+              {
+                "name": "SERVICE_URL",
+                "type": "STRING"
+              },
+              {
+                "name": "MODEL_ID",
+                "type": "bigint"
+              },
+              {
+                "name": "QUERY_TYPE",
+                "type": "int"
+              },
+              {
+                "name": "FMT_TYPE",
+                "type": "int"
+              },
+              {
+                "name": "SYS_ID",
+                "type": "bigint"
+              },
+              {
+                "name": "PROT_ID",
+                "type": "bigint"
+              },
+              {
+                "name": "IF_MSG_SWITCH",
+                "type": "int"
+              },
+              {
+                "name": "STATUS",
+                "type": "int"
+              },
+              {
+                "name": "S_LEVEL",
+                "type": "STRING"
+              },
+              {
+                "name": "S_DESC",
+                "type": "STRING"
+              },
+              {
+                "name": "PRODUCT_DESC",
+                "type": "STRING"
+              },
+              {
+                "name": "CLUSERT_ID",
+                "type": "bigint"
+              },
+              {
+                "name": "ORDER_NUM",
+                "type": "int"
+              },
+              {
+                "name": "CALL_SUM",
+                "type": "int"
+              },
+              {
+                "name": "CALL_SUM_UPT_DATE",
+                "type": "date"
+              },
+              {
+                "name": "CALL_SUM_DCOOS",
+                "type": "int"
+              },
+              {
+                "name": "S_LOGO",
+                "type": "STRING"
+              },
+              {
+                "name": "ONLINE_DATE",
+                "type": "date"
+              },
+              {
+                "name": "ONLINE_DESC",
+                "type": "STRING"
+              },
+              {
+                "name": "REMOVE_TYPE",
+                "type": "int"
+              },
+              {
+                "name": "REMOVE_DATE",
+                "type": "date"
+              },
+              {
+                "name": "REMOVE_DESC",
+                "type": "STRING"
+              },
+              {
+                "name": "HOT_LEVEL",
+                "type": "int"
+              },
+              {
+                "name": "FAVORITE_NUM",
+                "type": "int"
+              },
+              {
+                "name": "ORDER_CODE",
+                "type": "int"
+              },
+              {
+                "name": "CRT_USER_ID",
+                "type": "bigint"
+              },
+              {
+                "name": "CRT_USER_NAME",
+                "type": "STRING"
+              },
+              {
+                "name": "CRT_DATE",
+                "type": "date"
+              },
+              {
+                "name": "DEV_TYPE",
+                "type": "int"
+              },
+              {
+                "name": "LEVEL_TYPE",
+                "type": "int"
+              },
+              {
+                "name": "LEVEL_FLAG",
+                "type": "int"
+              },
+              {
+                "name": "IS_ENCRYPT",
+                "type": "int"
+              },
+              {
+                "name": "PROCESS_INSTANCE_ID",
+                "type": "STRING"
+              },
+              {
+                "name": "PROCESS_INSTANCE_TYPE",
+                "type": "smallint"
+              },
+              {
+                "name": "PROCESS_CREATE_TIME",
+                "type": "date"
+              },
+              {
+                "name": "PROCESS_BUSINESSJSON",
+                "type": "STRING"
+              },
+              {
+                "name": "ENVIRONMENT",
+                "type": "int"
+              },
+              {
+                "name": "TENANT_ID",
+                "type": "bigint"
+              },
+              {
+                "name": "PROJECT_ID",
+                "type": "bigint"
+              },
+              {
+                "name": "ROLE_ID",
+                "type": "bigint"
+              },
+              {
+                "name": "TIME_OUT",
+                "type": "int"
+              }
+            ],
+            "defaultFS": "hdfs://10.142.149.245:8020",
+            "fieldDelimiter": ",",
+            "fileName": "api_s_test2",
+            "fileType": "orc",
+            "path": "/user/hive/warehouse/api_s_test2",
+            "writeMode": "append"
+          }
+        }
+      }
+    ],
+    "setting": {
+      "speed": {
+        "byte": 31457280,
+        "channel": "6"
+      },
+      "errorLimit": {
+        "record": 20000,
+        "percentage": 0.02
+      }
+    }
+  }
+}

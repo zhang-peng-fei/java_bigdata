@@ -1,0 +1,80 @@
+{
+  "job": {
+    "content": [
+      {
+        "reader": {
+          "name": "hdfsreader",
+          "parameter": {
+            "column": [
+              {
+                "index": 0,
+                "name": "mdn",
+                "part": false,
+                "type": "string"
+              },
+              {
+                "index": 1,
+                "name": "r_trmnl_brand",
+                "part": false,
+                "type": "string"
+              },
+              {
+                "index": 2,
+                "name": "r_trmnl_model",
+                "part": false,
+                "type": "string"
+              },
+              {
+                "index": 3,
+                "name": "r_use_day",
+                "part": false,
+                "type": "string"
+              },
+              {
+                "index": 4,
+                "name": "d_trmnl_brand",
+                "part": false,
+                "type": "string"
+              },
+              {
+                "index": 5,
+                "name": "d_trmnl_model",
+                "part": false,
+                "type": "string"
+              },
+              {
+                "index": 6,
+                "name": "d_use_day",
+                "part": false,
+                "type": "string"
+              },
+              {
+                "index": 7,
+                "name": "data_day",
+                "part": true,
+                "type": "string"
+              }
+            ],
+            "defaultFS": "hdfs://192.168.78.135:9000",
+            "encoding": "UTF-8",
+            "fieldDelimiter": ",",
+            "fileType": "orc",
+            "path": "/user/hive/warehouse/students/*"
+          }
+        },
+        "writer": {
+          "name": "streamwriter",
+          "parameter": {
+            "encoding": "",
+            "print": true
+          }
+        }
+      }
+    ],
+    "setting": {
+      "speed": {
+        "channel": "1"
+      }
+    }
+  }
+}

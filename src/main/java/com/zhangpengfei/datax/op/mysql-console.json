@@ -1,0 +1,45 @@
+{
+  "job": {
+    "content": [
+      {
+        "reader": {
+          "name": "mysqlreader",
+          "parameter": {
+            "column": [
+              "*"
+            ],
+            "where": "s_id < 50",
+            "connection": [
+              {
+                "jdbcUrl": [
+                  "jdbc:mysql://10.142.101.136:3306/dop"
+                ],
+                "table": [
+                  "dop_api_s"
+                ]
+              }
+            ],
+            "username": "dop",
+            "password": "tydiC#_2019Jcnla"
+          }
+        },
+        "writer": {
+          "name": "streamwriter",
+          "parameter": {
+            "encoding": "utf-8",
+            "print": true
+          }
+        }
+      }
+    ],
+    "setting": {
+      "speed": {
+        "channel": "3"
+      },
+      "errorLimit": {
+        "record": 0,
+        "percentage": 0.02
+      }
+    }
+  }
+}

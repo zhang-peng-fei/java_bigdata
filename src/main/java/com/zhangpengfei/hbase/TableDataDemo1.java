@@ -40,7 +40,8 @@ public class TableDataDemo1 {
     private static void scanData(HTable table) throws IOException {
         // 初始化 startRow 和 endRow
         Scan scan = new Scan("123".getBytes(), "rowKey11".getBytes());
-
+        // 设置 rowKey 前缀，进行模糊查询
+        scan.setRowPrefixFilter("".getBytes());
         ResultScanner scanner = table.getScanner(scan);
         for (Result result : scanner) {
             // 获取 rowKey

@@ -1,0 +1,201 @@
+{
+  "job": {
+    "content": [
+      {
+        "reader": {
+          "name": "postgresqlreader",
+          "parameter": {
+            "connection": [
+              {
+                "jdbcUrl": [
+                  "jdbc:postgresql://10.142.101.22:5432/dop"
+                ],
+                "table": [
+                  "dop_mon_api_call_log_201910"
+                ]
+              }
+            ],
+            "where": "s_id = 1697",
+            "username": "dop",
+            "password": "tydiC&Jcnl2019",
+            "column": [
+              "s_id",
+              "api_type",
+              "user_id",
+              "seq_id",
+              "call_ip",
+              "user_agent",
+              "request_param",
+              "request_size",
+              "response_param",
+              "response_size",
+              "request_received_time",
+              "request_forward_time",
+              "response_received_time",
+              "response_forward_time",
+              "method",
+              "host",
+              "uri",
+              "result_flag",
+              "package_id",
+              "dcoos_api_id",
+              "err_level",
+              "gateway_business_response_code",
+              "gateway_response_code",
+              "business_response_code",
+              "backend_response_code",
+              "day_id",
+              "hour_id",
+              "raw_data",
+              "trace_id",
+              "month_id"
+            ]
+          }
+        },
+        "writer": {
+          "name": "hdfswriter",
+          "parameter": {
+            "column": [
+              {
+                "name": "s_id",
+                "type": "STRING"
+              },
+              {
+                "name": "api_type",
+                "type": "STRING"
+              },
+              {
+                "name": "user_id",
+                "type": "STRING"
+              },
+              {
+                "name": "seq_id",
+                "type": "STRING"
+              },
+              {
+                "name": "call_ip",
+                "type": "STRING"
+              },
+              {
+                "name": "user_agent",
+                "type": "STRING"
+              },
+              {
+                "name": "request_param",
+                "type": "STRING"
+              },
+              {
+                "name": "request_size",
+                "type": "STRING"
+              },
+              {
+                "name": "response_param",
+                "type": "STRING"
+              },
+              {
+                "name": "response_size",
+                "type": "STRING"
+              },
+              {
+                "name": "request_received_time",
+                "type": "TIMESTAMP"
+              },
+              {
+                "name": "request_forward_time",
+                "type": "TIMESTAMP"
+              },
+              {
+                "name": "response_received_time",
+                "type": "TIMESTAMP"
+              },
+              {
+                "name": "response_forward_time",
+                "type": "TIMESTAMP"
+              },
+              {
+                "name": "method",
+                "type": "STRING"
+              },
+              {
+                "name": "host",
+                "type": "STRING"
+              },
+              {
+                "name": "uri",
+                "type": "STRING"
+              },
+              {
+                "name": "result_flag",
+                "type": "STRING"
+              },
+              {
+                "name": "package_id",
+                "type": "STRING"
+              },
+              {
+                "name": "dcoos_api_id",
+                "type": "STRING"
+              },
+              {
+                "name": "err_level",
+                "type": "STRING"
+              },
+              {
+                "name": "gateway_business_response_code",
+                "type": "STRING"
+              },
+              {
+                "name": "gateway_response_code",
+                "type": "STRING"
+              },
+              {
+                "name": "business_response_code",
+                "type": "STRING"
+              },
+              {
+                "name": "backend_response_code",
+                "type": "STRING"
+              },
+              {
+                "name": "day_id",
+                "type": "INT"
+              },
+              {
+                "name": "hour_id",
+                "type": "INT"
+              },
+              {
+                "name": "raw_data",
+                "type": "STRING"
+              },
+              {
+                "name": "trace_id",
+                "type": "STRING"
+              },
+              {
+                "name": "month_id",
+                "type": "INT"
+              }
+            ],
+            "defaultFS": "hdfs://10.142.149.245:8020",
+            "fieldDelimiter": ",",
+            "fileName": "api_call_log_test1",
+            "fileType": "orc",
+            "path": "/user/hive/warehouse/api_call_log_test1/month_id=201910",
+            "writeMode": "append"
+          }
+        }
+      }
+    ],
+    "setting": {
+      "speed": {
+        "byte": 31457280,
+        "channel": "6"
+      },
+      "errorLimit": {
+        "record": 20000,
+        "percentage": 0.02
+      }
+    }
+  }
+}

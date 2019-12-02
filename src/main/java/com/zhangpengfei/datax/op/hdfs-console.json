@@ -1,0 +1,33 @@
+{
+  "job": {
+    "content": [
+      {
+        "reader": {
+          "name": "hdfsreader",
+          "parameter": {
+            "column": [
+              "*"
+            ],
+            "defaultFS": "hdfs://10.142.149.245:8020",
+            "encoding": "UTF-8",
+            "fieldDelimiter": ",",
+            "fileType": "orc",
+            "path": "/user/hive/warehouse/students/*"
+          }
+        },
+        "writer": {
+          "name": "streamwriter",
+          "parameter": {
+            "encoding": "",
+            "print": true
+          }
+        }
+      }
+    ],
+    "setting": {
+      "speed": {
+        "channel": "1"
+      }
+    }
+  }
+}

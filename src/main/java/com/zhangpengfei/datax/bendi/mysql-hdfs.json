@@ -1,0 +1,106 @@
+{
+  "job": {
+    "content": [
+      {
+        "reader": {
+          "name": "mysqlreader",
+          "parameter": {
+            "column": [
+              "TBL_ID",
+              "CREATE_TIME",
+              "LAST_ACCESS_TIME",
+              "OWNER",
+              "RETENTION",
+              "SD_ID",
+              "TBL_NAME",
+              "TBL_TYPE",
+              "VIEW_EXPANDED_TEXT",
+              "VIEW_ORIGINAL_TEXT",
+              "IS_REWRITE_ENABLED",
+              "DB_ID"
+            ],
+            "connection": [
+              {
+                "jdbcUrl": [
+                  "jdbc:mysql://127.0.0.1:3306/hive_db"
+                ],
+                "table": [
+                  "TBLS"
+                ]
+              }
+            ],
+            "password": "root",
+            "username": "root"
+          }
+        },
+        "writer": {
+          "name": "hdfswriter",
+          "parameter": {
+            "column": [
+              {
+                "name": "tbl_id",
+                "type": "STRING"
+              },
+              {
+                "name": "create_time",
+                "type": "STRING"
+              },
+              {
+                "name": "last_access_time",
+                "type": "STRING"
+              },
+              {
+                "name": "owner",
+                "type": "STRING"
+              },
+              {
+                "name": "retention",
+                "type": "STRING"
+              },
+              {
+                "name": "sd_id",
+                "type": "STRING"
+              },
+              {
+                "name": "tbl_name",
+                "type": "STRING"
+              },
+              {
+                "name": "tbl_type",
+                "type": "STRING"
+              },
+              {
+                "name": "view_expanded_text",
+                "type": "STRING"
+              },
+              {
+                "name": "view_original_text",
+                "type": "STRING"
+              },
+              {
+                "name": "is_rewrite_enabled",
+                "type": "STRING"
+              },
+              {
+                "name": "db_id",
+                "type": "STRING"
+              }
+            ],
+            "compress": "gzip",
+            "defaultFS": "hdfs://192.168.78.135:9000",
+            "fieldDelimiter": ",",
+            "fileName": "tbls",
+            "fileType": "orc",
+            "path": "/user/hive/warehouse/dop_api_s",
+            "writeMode": "append"
+          }
+        }
+      }
+    ],
+    "setting": {
+      "speed": {
+        "channel": "2"
+      }
+    }
+  }
+}

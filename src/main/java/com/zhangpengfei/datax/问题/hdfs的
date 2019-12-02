@@ -1,0 +1,49 @@
+2019-11-26 18:08:41.531 [0-0-0-writer] INFO  HdfsWriter$Job - start delete tmp dir [hdfs://10.142.149.245:8020/user/hive/warehouse/api_call_log_test1/month_id=201910__83a26b08_09c1_4bbb_9cfe_600ea0739b5b] .
+2019-11-26 18:08:41.532 [0-0-0-writer] ERROR HdfsWriter$Job - 判断文件路径[message:filePath =hdfs://10.142.149.245:8020/user/hive/warehouse/api_call_log_test1/month_id=201910__83a26b08_09c1_4bbb_9cfe_600ea0739b5b]是否存在时发生网络IO异常,请检查您的网络是否正常！
+2019-11-26 18:08:41.532 [0-0-0-writer] ERROR HdfsWriter$Job - 删除临时目录[hdfs://10.142.149.245:8020/user/hive/warehouse/api_call_log_test1/month_id=201910__83a26b08_09c1_4bbb_9cfe_600ea0739b5b]时发生IO异常,请检查您的网络是否正常！
+2019-11-26 18:08:41.537 [0-0-0-writer] ERROR WriterRunner - Writer Runner Received Exceptions:
+com.alibaba.datax.common.exception.DataXException: Code:[HdfsWriter-06], Description:[与HDFS建立连接时出现IO异常.]. - java.io.IOException: Filesystem closed
+        at org.apache.hadoop.hdfs.DFSClient.checkOpen(DFSClient.java:808)
+        at org.apache.hadoop.hdfs.DFSClient.getFileInfo(DFSClient.java:2113)
+        at org.apache.hadoop.hdfs.DistributedFileSystem$22.doCall(DistributedFileSystem.java:1305)
+        at org.apache.hadoop.hdfs.DistributedFileSystem$22.doCall(DistributedFileSystem.java:1301)
+        at org.apache.hadoop.fs.FileSystemLinkResolver.resolve(FileSystemLinkResolver.java:81)
+        at org.apache.hadoop.hdfs.DistributedFileSystem.getFileStatus(DistributedFileSystem.java:1317)
+        at org.apache.hadoop.fs.FileSystem.exists(FileSystem.java:1424)
+        at com.alibaba.datax.plugin.writer.hdfswriter.HdfsHelper.isPathexists(HdfsHelper.java:156)
+        at com.alibaba.datax.plugin.writer.hdfswriter.HdfsHelper.deleteDir(HdfsHelper.java:196)
+        at com.alibaba.datax.plugin.writer.hdfswriter.HdfsHelper.orcFileStartWrite(HdfsHelper.java:394)
+        at com.alibaba.datax.plugin.writer.hdfswriter.HdfsWriter$Task.startWrite(HdfsWriter.java:364)
+        at com.alibaba.datax.core.taskgroup.runner.WriterRunner.run(WriterRunner.java:56)
+        at java.lang.Thread.run(Thread.java:745)
+ - java.io.IOException: Filesystem closed
+        at org.apache.hadoop.hdfs.DFSClient.checkOpen(DFSClient.java:808)
+        at org.apache.hadoop.hdfs.DFSClient.getFileInfo(DFSClient.java:2113)
+        at org.apache.hadoop.hdfs.DistributedFileSystem$22.doCall(DistributedFileSystem.java:1305)
+        at org.apache.hadoop.hdfs.DistributedFileSystem$22.doCall(DistributedFileSystem.java:1301)
+        at org.apache.hadoop.fs.FileSystemLinkResolver.resolve(FileSystemLinkResolver.java:81)
+        at org.apache.hadoop.hdfs.DistributedFileSystem.getFileStatus(DistributedFileSystem.java:1317)
+        at org.apache.hadoop.fs.FileSystem.exists(FileSystem.java:1424)
+        at com.alibaba.datax.plugin.writer.hdfswriter.HdfsHelper.isPathexists(HdfsHelper.java:156)
+        at com.alibaba.datax.plugin.writer.hdfswriter.HdfsHelper.deleteDir(HdfsHelper.java:196)
+        at com.alibaba.datax.plugin.writer.hdfswriter.HdfsHelper.orcFileStartWrite(HdfsHelper.java:394)
+        at com.alibaba.datax.plugin.writer.hdfswriter.HdfsWriter$Task.startWrite(HdfsWriter.java:364)
+        at com.alibaba.datax.core.taskgroup.runner.WriterRunner.run(WriterRunner.java:56)
+        at java.lang.Thread.run(Thread.java:745)
+
+        at com.alibaba.datax.common.exception.DataXException.asDataXException(DataXException.java:40) ~[datax-common-0.0.1-SNAPSHOT.jar:na]
+        at com.alibaba.datax.plugin.writer.hdfswriter.HdfsHelper.isPathexists(HdfsHelper.java:161) ~[hdfswriter-0.0.1-SNAPSHOT.jar:na]
+        at com.alibaba.datax.plugin.writer.hdfswriter.HdfsHelper.deleteDir(HdfsHelper.java:196) ~[hdfswriter-0.0.1-SNAPSHOT.jar:na]
+        at com.alibaba.datax.plugin.writer.hdfswriter.HdfsHelper.orcFileStartWrite(HdfsHelper.java:394) ~[hdfswriter-0.0.1-SNAPSHOT.jar:na]
+        at com.alibaba.datax.plugin.writer.hdfswriter.HdfsWriter$Task.startWrite(HdfsWriter.java:364) ~[hdfswriter-0.0.1-SNAPSHOT.jar:na]
+        at com.alibaba.datax.core.taskgroup.runner.WriterRunner.run(WriterRunner.java:56) ~[datax-core-0.0.1-SNAPSHOT.jar:na]
+        at java.lang.Thread.run(Thread.java:745) [na:1.7.0_75]
+Caused by: java.io.IOException: Filesystem closed
+        at org.apache.hadoop.hdfs.DFSClient.checkOpen(DFSClient.java:808) ~[hadoop-hdfs-2.7.1.jar:na]
+        at org.apache.hadoop.hdfs.DFSClient.getFileInfo(DFSClient.java:2113) ~[hadoop-hdfs-2.7.1.jar:na]
+        at org.apache.hadoop.hdfs.DistributedFileSystem$22.doCall(DistributedFileSystem.java:1305) ~[hadoop-hdfs-2.7.1.jar:na]
+        at org.apache.hadoop.hdfs.DistributedFileSystem$22.doCall(DistributedFileSystem.java:1301) ~[hadoop-hdfs-2.7.1.jar:na]
+        at org.apache.hadoop.fs.FileSystemLinkResolver.resolve(FileSystemLinkResolver.java:81) ~[hadoop-common-2.7.1.jar:na]
+        at org.apache.hadoop.hdfs.DistributedFileSystem.getFileStatus(DistributedFileSystem.java:1317) ~[hadoop-hdfs-2.7.1.jar:na]
+        at org.apache.hadoop.fs.FileSystem.exists(FileSystem.java:1424) ~[hadoop-common-2.7.1.jar:na]
+        at com.alibaba.datax.plugin.writer.hdfswriter.HdfsHelper.isPathexists(HdfsHelper.java:156) ~[hdfswriter-0.0.1-SNAPSHOT.jar:na]
