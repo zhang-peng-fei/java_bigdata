@@ -15,17 +15,6 @@
     <name>flink_demo</name>
     <description>Demo project for Spring Boot</description>
 
-    <properties>
-        <java.version>1.8</java.version>
-        <flink.version>1.9.0</flink.version>
-        <hadoop.version>2.7.5</hadoop.version>
-        <storm.version>2.0.0</storm.version>
-        <hbase.version>1.2.0</hbase.version>
-        <kafka.version>0.10.2.2</kafka.version>
-        <storm.scope>provided</storm.scope>
-    </properties>
-
-    <!--thymeleaf前端页面依赖-->
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -46,7 +35,13 @@
             <scope>test</scope>
         </dependency>
 
-        <!--Flink Java基础依赖-->
+        <!--
+        Flink依赖开始
+        flink-java,
+        flink-streaming-java,
+        flink-connector-kafka,
+        flink-connector-kafka-base
+        -->
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-java</artifactId>
@@ -59,42 +54,51 @@
             <version>${flink.version}</version>
             <scope>provided</scope>
         </dependency>
-        <!--Flink连接Kafka依赖-->
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-connector-kafka_2.11</artifactId>
             <scope>provided</scope>
             <version>${flink.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-connector-kafka-base -->
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-connector-kafka-base_2.11</artifactId>
             <version>${flink.version}</version>
             <scope>provided</scope>
         </dependency>
-        <!--hadoop common 依赖-->
+        <!-- Flink 依赖结束-->
+
+        <!-- Hadoop依赖开始
+        hadoop-common,
+        hadoop-mapreduce-client-core
+        -->
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-common</artifactId>
             <version>${hadoop.version}</version>
             <scope>compile</scope>
         </dependency>
-        <!--mapreduce 依赖-->
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-mapreduce-client-core</artifactId>
             <version>${hadoop.version}</version>
             <!--<scope>provided</scope>-->
         </dependency>
-        <!-- Storm依赖 https://mvnrepository.com/artifact/org.apache.storm/storm-core -->
+        <!-- Hadoop 依赖结束-->
+
+        <!--
+        Storm 依赖开始
+        storm-core,
+        storm-kafka,
+        storm-kafka-client,
+        storm-kafka-client-examples
+         -->
         <dependency>
             <groupId>org.apache.storm</groupId>
             <artifactId>storm-core</artifactId>
             <version>${storm.version}</version>
             <scope>${storm.scope}</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.storm/storm-kafka -->
         <dependency>
             <groupId>org.apache.storm</groupId>
             <artifactId>storm-kafka</artifactId>
@@ -113,28 +117,43 @@
             <version>${storm.version}</version>
             <scope>${storm.scope}</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients -->
+        <!-- Storm 依赖结束 -->
+
+        <!-- Kafka 依赖开始
+          kafka-clients,
+           -->
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-clients</artifactId>
             <version>${kafka.version}</version>
         </dependency>
+        <!-- Kafka 依赖结束 -->
 
-
-        <!-- hbase-client 依赖 https://mvnrepository.com/artifact/org.apache.hbase/hbase-client -->
+        <!-- Hbase 依赖开始
+        hbase-client,
+        hbase-server
+        -->
         <dependency>
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-client</artifactId>
             <version>${hbase.version}</version>
         </dependency>
-        <!-- hbase-server 依赖 -->
         <dependency>
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-server</artifactId>
             <version>${hbase.version}</version>
         </dependency>
+        <!-- Hbase 依赖结束-->
 
-
+        <!-- Hive依赖开始
+        hive-exec
+        -->
+        <!--<dependency>
+            <groupId>org.apache.hive</groupId>
+            <artifactId>hive-exec</artifactId>
+            <version>${hive.version}</version>
+        </dependency>-->
+        <!-- Hive 依赖结束-->
         <!-- https://mvnrepository.com/artifact/com.codahale.metrics/metrics-core -->
         <dependency>
             <groupId>com.codahale.metrics</groupId>
@@ -143,6 +162,17 @@
         </dependency>
 
     </dependencies>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <flink.version>1.9.0</flink.version>
+        <hadoop.version>2.7.5</hadoop.version>
+        <storm.version>1.2.3</storm.version>
+        <hbase.version>1.2.0</hbase.version>
+        <kafka.version>0.10.2.2</kafka.version>
+        <storm.scope>provided</storm.scope>
+        <hive.version>1.1.0</hive.version>
+    </properties>
 
     <build>
         <plugins>
