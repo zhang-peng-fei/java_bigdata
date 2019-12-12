@@ -19,20 +19,21 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <!--mysql数据库驱动-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
+            <scope>provided</scope>
         </dependency>
 
         <!--springboot启动依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <scope>provided</scope>
         </dependency>
 
         <!--
@@ -46,25 +47,25 @@
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-java</artifactId>
             <version>${flink.version}</version>
-            <scope>provided</scope>
+            <scope>${flink.scope}</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-streaming-java_2.11</artifactId>
             <version>${flink.version}</version>
-            <scope>provided</scope>
+            <scope>${flink.scope}</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-connector-kafka_2.11</artifactId>
-            <scope>provided</scope>
             <version>${flink.version}</version>
+            <scope>${flink.scope}</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-connector-kafka-base_2.11</artifactId>
             <version>${flink.version}</version>
-            <scope>provided</scope>
+            <scope>${flink.scope}</scope>
         </dependency>
         <!-- Flink 依赖结束-->
 
@@ -76,13 +77,13 @@
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-common</artifactId>
             <version>${hadoop.version}</version>
-            <scope>compile</scope>
+            <scope>${hadoop.scope}</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-mapreduce-client-core</artifactId>
             <version>${hadoop.version}</version>
-            <!--<scope>provided</scope>-->
+            <scope>${hadoop.scope}</scope>
         </dependency>
         <!-- Hadoop 依赖结束-->
 
@@ -99,12 +100,14 @@
             <version>${storm.version}</version>
             <scope>${storm.scope}</scope>
         </dependency>
+<!--
         <dependency>
             <groupId>org.apache.storm</groupId>
             <artifactId>storm-kafka</artifactId>
             <version>${storm.version}</version>
             <scope>${storm.scope}</scope>
         </dependency>
+-->
         <dependency>
             <groupId>org.apache.storm</groupId>
             <artifactId>storm-kafka-client</artifactId>
@@ -126,6 +129,7 @@
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-clients</artifactId>
             <version>${kafka.version}</version>
+            <scope>${kafka.scope}</scope>
         </dependency>
         <!-- Kafka 依赖结束 -->
 
@@ -137,41 +141,63 @@
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-client</artifactId>
             <version>${hbase.version}</version>
+            <scope>${hbase.scope}</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-server</artifactId>
             <version>${hbase.version}</version>
+            <scope>${hbase.scope}</scope>
         </dependency>
         <!-- Hbase 依赖结束-->
 
         <!-- Hive依赖开始
         hive-exec
         -->
-        <!--<dependency>
+        <dependency>
             <groupId>org.apache.hive</groupId>
             <artifactId>hive-exec</artifactId>
             <version>${hive.version}</version>
-        </dependency>-->
+            <scope>${hive-exec.scope}</scope>
+            <!-- 依赖冲突，排除冲突包-->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.calcite</groupId>
+                    <artifactId>calcite-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.calcite</groupId>
+                    <artifactId>calcite-avatica</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
         <!-- Hive 依赖结束-->
         <!-- https://mvnrepository.com/artifact/com.codahale.metrics/metrics-core -->
         <dependency>
             <groupId>com.codahale.metrics</groupId>
             <artifactId>metrics-core</artifactId>
             <version>3.0.2</version>
+            <scope>provided</scope>
         </dependency>
 
     </dependencies>
 
     <properties>
-        <java.version>1.8</java.version>
+        <!-- 版本 -->
+        <java.version>1.7</java.version>
         <flink.version>1.9.0</flink.version>
         <hadoop.version>2.7.5</hadoop.version>
-        <storm.version>1.2.3</storm.version>
+        <storm.version>2.0.0</storm.version>
         <hbase.version>1.2.0</hbase.version>
         <kafka.version>0.10.2.2</kafka.version>
-        <storm.scope>provided</storm.scope>
         <hive.version>1.1.0</hive.version>
+        <!-- 作用域 -->
+        <hive-exec.scope>provided</hive-exec.scope>
+        <storm.scope>provided</storm.scope>
+        <flink.scope>provided</flink.scope>
+        <hadoop.scope>provided</hadoop.scope>
+        <kafka.scope>provided</kafka.scope>
+        <hbase.scope>provided</hbase.scope>
     </properties>
 
     <build>

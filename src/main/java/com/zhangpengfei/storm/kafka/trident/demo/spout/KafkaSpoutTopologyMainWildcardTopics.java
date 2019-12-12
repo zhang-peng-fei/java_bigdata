@@ -14,7 +14,7 @@ import static org.apache.storm.kafka.spout.FirstPollOffsetStrategy.EARLIEST;
 /**
  * @author 张朋飞
  */
-public class KafkaSpoutTopologyMainWildcardTopics extends KafkaSpoutTopologyMainNamedTopics {
+public class KafkaSpoutTopologyMainWildcardTopics extends KafkaSpoutTopologyMainNamedTopics {/*
     private static final String STREAM = "test_wildcard_stream";
     private static final Pattern TOPIC_WILDCARD_PATTERN = Pattern.compile("kafka-spout-test-[1|2]");
 
@@ -41,5 +41,5 @@ public class KafkaSpoutTopologyMainWildcardTopics extends KafkaSpoutTopologyMain
                 .setFirstPollOffsetStrategy(EARLIEST)
                 .setMaxUncommittedOffsets(250)
                 .build();
-    }
+    }*/
 }

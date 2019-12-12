@@ -14,7 +14,7 @@ import org.apache.storm.tuple.Values;
 import static org.apache.storm.kafka.spout.FirstPollOffsetStrategy.EARLIEST;
 
 
-public class KafkaSpoutTopologyMainNamedTopics {
+public class KafkaSpoutTopologyMainNamedTopics {/*
     private static final String TOPIC_2_STREAM = "test_2_stream";
     private static final String TOPIC_0_1_STREAM = "test_0_1_stream";
     private static final String KAFKA_LOCAL_BROKER = "localhost:9092";
@@ -77,5 +77,5 @@ public class KafkaSpoutTopologyMainNamedTopics {
     protected KafkaSpoutRetryService getRetryService() {
         return new KafkaSpoutRetryExponentialBackoff(TimeInterval.microSeconds(500),
                 TimeInterval.milliSeconds(2), Integer.MAX_VALUE, TimeInterval.seconds(10));
-    }
+    }*/
 }

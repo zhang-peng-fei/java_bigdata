@@ -11,7 +11,41 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class JsonCountUdtf extends GenericUDTF {
+/**
+ *
+ *
+ *
+
+ add jar /data1/tydic/java_bigdata.jar;
+ create temporary function data_decode_udtf as 'com.zhangpengfei.hive.udtf.DataUdtf';
+ select data_decode_udtf(1,2,3);
+
+ +------+--+
+ | col  |
+ +------+--+
+ | 1    |
+ | 2    |
+ | 3    |
+ +------+--+
+
+ select data_decode_udtf(map(1,2,3,4));
+
+ +------+--------+--+
+ | key  | value  |
+ +------+--------+--+
+ | 1    | 2      |
+ | 3    | 4      |
+ +------+--------+--+
+
+
+ *
+ *
+ *
+ *
+ *
+ * @author 张朋飞
+ */
+public class DataUdtf extends GenericUDTF {
 
     private transient ObjectInspector inputOI = null;
 
@@ -31,6 +65,7 @@ public class JsonCountUdtf extends GenericUDTF {
 
         List<String> fieldNames = new ArrayList<>();
         List<ObjectInspector> fieldOIs = new ArrayList<>();
+
         switch (udfInputOIs[0].getCategory()) {
             case LIST:
                 inputOI = udfInputOIs[0];

@@ -9,7 +9,7 @@ import org.apache.storm.tuple.Values;
 /**
  * @author 张朋飞
  */
-public class TridentKafkaClientTopologyWildcardTopics extends TridentKafkaClientTopologyNamedTopics {
+public class TridentKafkaClientTopologyWildcardTopics extends TridentKafkaClientTopologyNamedTopics {/*
     private static final Pattern TOPIC_WILDCARD_PATTERN = Pattern.compile("test-trident(-1)?");
 
     @Override
@@ -23,5 +23,5 @@ public class TridentKafkaClientTopologyWildcardTopics extends TridentKafkaClient
 
     public static void main(String[] args) throws Exception {
         new TridentKafkaClientTopologyWildcardTopics().run(args);
-    }
+    }*/
 }

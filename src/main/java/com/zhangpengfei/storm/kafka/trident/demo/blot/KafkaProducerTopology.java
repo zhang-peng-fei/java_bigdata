@@ -12,15 +12,15 @@ import org.apache.storm.utils.Utils;
 /**
  * @author 张朋飞
  */
-public class KafkaProducerTopology {
-    /**
+public class KafkaProducerTopology {/*
+    *//**
      * Create a new topology that writes random UUIDs to Kafka.
      *
      * @param brokerUrl Kafka broker URL
      * @param topicName Topic to which publish sentences
      * @return A Storm topology that produces random UUIDs using a {@link LambdaSpout} and uses a {@link KafkaBolt} to publish the UUIDs to
      *     the kafka topic specified
-     */
+     *//*
     public static StormTopology newTopology(String brokerUrl, String topicName) {
         final TopologyBuilder builder = new TopologyBuilder();
         builder.setSpout("spout", () -> {
@@ -28,9 +28,9 @@ public class KafkaProducerTopology {
             return UUID.randomUUID().toString();
         });
 
-        /* The output field of the spout ("lambda") is provided as the boltMessageField
+        *//* The output field of the spout ("lambda") is provided as the boltMessageField
           so that this gets written out as the message in the kafka topic.
-          The tuples have no key field, so the messages are written to Kafka without a key.*/
+          The tuples have no key field, so the messages are written to Kafka without a key.*//*
         final KafkaBolt<String, String> bolt = new KafkaBolt<String, String>()
                 .withProducerProperties(newProps(brokerUrl, topicName))
                 .withTopicSelector(new DefaultTopicSelector(topicName))
@@ -41,10 +41,10 @@ public class KafkaProducerTopology {
         return builder.createTopology();
     }
 
-    /**
+    *//**
      * Create the Storm config.
      * @return the Storm config for the topology that publishes random UUIDs to Kafka using a Kafka bolt.
-     */
+     *//*
     private static Properties newProps(final String brokerUrl, final String topicName) {
         return new Properties() {
             {
@@ -54,5 +54,5 @@ public class KafkaProducerTopology {
                 put(ProducerConfig.CLIENT_ID_CONFIG, topicName);
             }
         };
-    }
+    }*/
 }
