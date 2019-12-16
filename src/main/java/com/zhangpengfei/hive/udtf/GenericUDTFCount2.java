@@ -18,7 +18,7 @@ import java.util.ArrayList;
  create temporary function demo_udtf as 'com.zhangpengfei.hive.udtf.GenericUDTFCount2';
  select demo_udtf(1,2);
 
- 调用该函数将返回
+ 调用该函数将返回,将 0 打印两次
  +-------+--+
  | col1  |
  +-------+--+
@@ -43,7 +43,7 @@ public class GenericUDTFCount2 extends GenericUDTF {
     }
 
     @Override
-    public StructObjectInspector initialize(StructObjectInspector argOIs) throws UDFArgumentException {
+    public StructObjectInspector initialize(StructObjectInspector argOIs) {
         ArrayList<String> fieldNames = new ArrayList<>();
         ArrayList<ObjectInspector> fieldObjectInspector = new ArrayList<>();
         ArrayList<String> fieldCommits = new ArrayList<>();
@@ -57,7 +57,7 @@ public class GenericUDTFCount2 extends GenericUDTF {
     }
 
     @Override
-    public void close() throws HiveException {
+    public void close() {
         count = Integer.valueOf(count.intValue() + 1);
     }
 }

@@ -15,10 +15,11 @@ import java.util.Map;
  *
  *
  *
+ * 将 list，map 转为 列显示，等价于 hive 内置函数 map
 
  add jar /data1/tydic/java_bigdata.jar;
  create temporary function data_decode_udtf as 'com.zhangpengfei.hive.udtf.DataUdtf';
- select data_decode_udtf(1,2,3);
+ select data_decode_udtf(array(1,2,3,4));
 
  +------+--+
  | col  |
@@ -26,6 +27,7 @@ import java.util.Map;
  | 1    |
  | 2    |
  | 3    |
+ | 4    |
  +------+--+
 
  select data_decode_udtf(map(1,2,3,4));
@@ -37,11 +39,6 @@ import java.util.Map;
  | 3    | 4      |
  +------+--------+--+
 
-
- *
- *
- *
- *
  *
  * @author 张朋飞
  */
@@ -56,7 +53,7 @@ public class DataUdtf extends GenericUDTF {
         ObjectInspector[] udfInputOIs = new ObjectInspector[inputFields.size()];
         for (int i = 0; i < inputFields.size(); i++) {
             //字段类型
-            udfInputOIs[i] = inputFields.get(i).getFieldObjectInspector();
+                udfInputOIs[i] = inputFields.get(i).getFieldObjectInspector();
         }
 
         if (udfInputOIs.length != 1) {
@@ -136,7 +133,7 @@ public class DataUdtf extends GenericUDTF {
     }
 
     @Override
-    public void close() throws HiveException {
+    public void close() {
 
     }
 }

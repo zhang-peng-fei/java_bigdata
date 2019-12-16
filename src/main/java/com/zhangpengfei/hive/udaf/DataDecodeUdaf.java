@@ -13,9 +13,10 @@ import org.apache.hadoop.hive.serde2.io.DoubleWritable;
 import org.apache.hadoop.hive.serde2.objectinspector.ObjectInspector;
 import org.apache.hadoop.hive.serde2.objectinspector.ObjectInspectorFactory;
 import org.apache.hadoop.hive.serde2.objectinspector.StandardStructObjectInspector;
-import org.apache.hadoop.hive.serde2.objectinspector.primitive.*;
+import org.apache.hadoop.hive.serde2.objectinspector.primitive.PrimitiveObjectInspectorFactory;
+import org.apache.hadoop.hive.serde2.objectinspector.primitive.StringObjectInspector;
+import org.apache.hadoop.hive.serde2.objectinspector.primitive.WritableStringObjectInspector;
 import org.apache.hadoop.hive.serde2.typeinfo.TypeInfo;
-import org.apache.hadoop.io.IntWritable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,6 +26,9 @@ import java.util.Map;
 
 
 /**
+ *
+ * response_param 字段中是一个 json 串，需要解析 json 串，对 code 进行 group by 和 count
+ *
  * delete jar /data1/tydic/java_bigdata.jar;
  * select response_param from api_call_log_test1 where month_id=1;
  *
@@ -39,9 +43,11 @@ import java.util.Map;
  select data_decode_udaf1(response_param) from api_call_log_test1 where month_id=1;
  select data_decode_udaf1(response_param) from api_call_log_test1 where month_id = 201911 and api_type = 1 and result_flag = 1 group by s_id;
 
- response_param 字段中是一个 json 串，需要解析 json 串，对 code 进行group by 和 sort by
-
-
+ +-----------------+--+
+ |       _c0       |
+ +-----------------+--+
+ | {{10000=10}=1}  |
+ +-----------------+--+
 
  * * select * from api_call_log_test1 where month_id = 201911 and api_type = 1 limit 5;
  * * select avg(cast(s_id as int)) from api_call_log_test1 where month_id = 201911 and api_type = 1 limit 2;
@@ -164,7 +170,7 @@ public class DataDecodeUdaf extends AbstractGenericUDAFResolver {
 
         /**
          * 重置 aggregation。
-         * 复用  aggregation
+         * 复用 aggregation
          *
          * @param aggregationBuffer
          */
@@ -240,7 +246,9 @@ public class DataDecodeUdaf extends AbstractGenericUDAFResolver {
         public Object terminate(AggregationBuffer aggregationBuffer) {
             CodeAgg codeAgg = (CodeAgg) aggregationBuffer;
             LOG.warn("=====================terminate 方法执行，说明聚合结束=====================");
-            return codeAgg.resMap;
+            LOG.debug(codeAgg);
+            Map<String, Integer> resMap = codeAgg.resMap;
+            return resMap;
 //            return standardStructObjectInspector.setStructFieldData(Map, codeAgg.resMap.)
         }
 

@@ -13,7 +13,7 @@ import org.apache.hadoop.hive.serde2.typeinfo.TypeInfo;
 import org.apache.hadoop.io.IntWritable;
 
 /**
- *
+ * 对 demo1 表中的 name 字段做切分，然后聚合之后的值应该为4
  *
  * select * from demo1;
  * +-----------+------------------+------------+--+
@@ -27,8 +27,11 @@ import org.apache.hadoop.io.IntWritable;
  create temporary function split_udaf as 'com.zhangpengfei.hive.udaf.SplitUdaf';
  select split_udaf(name) from demo1;
 
- 对上面 demo1 表中的 name 字段做切分，然后聚合之后的值应该为4
-
+ +------+--+
+ | _c0  |
+ +------+--+
+ | 4    |
+ +------+--+
 
  *
  *
