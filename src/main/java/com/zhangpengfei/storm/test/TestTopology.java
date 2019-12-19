@@ -1,5 +1,6 @@
 package com.zhangpengfei.storm.test;
 
+import clojure.lang.Obj;
 import org.apache.storm.Config;
 import org.apache.storm.LocalCluster;
 import org.apache.storm.testing.TestGlobalCount;
@@ -24,7 +25,7 @@ public class TestTopology {
         builder.setBolt("4", new TestGlobalCount())
                 .globalGrouping("1");
 
-        Map conf = new HashMap();
+        Map<String, Object> conf = new HashMap();
         conf.put(Config.TOPOLOGY_WORKERS, 4);
         conf.put(Config.TOPOLOGY_DEBUG, true);
 
