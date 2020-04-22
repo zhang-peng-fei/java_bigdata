@@ -22,6 +22,9 @@ import java.util.List;
 
 import static org.apache.storm.kafka.spout.FirstPollOffsetStrategy.EARLIEST;
 
+/**
+ * @author 张朋飞
+ */
 public class TridentKafkaClientTopologyNamedTopics_Local {
     private static final String TOPIC_1 = "test-trident";
     private static final String TOPIC_2 = "test-trident-1";

@@ -2,17 +2,18 @@ package com.zhangpengfei.hbase;
 
 import com.zhangpengfei.util.HbaseUtil;
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.hbase.HColumnDescriptor;
-import org.apache.hadoop.hbase.HConstants;
-import org.apache.hadoop.hbase.HTableDescriptor;
-import org.apache.hadoop.hbase.TableName;
+import org.apache.hadoop.hbase.*;
 import org.apache.hadoop.hbase.client.Admin;
 import org.apache.hadoop.hbase.client.Connection;
 import org.apache.hadoop.hbase.client.ConnectionFactory;
 import org.apache.hadoop.hbase.io.compress.Compression;
 import org.apache.hadoop.hbase.util.RegionSplitter;
+import org.apache.hadoop.io.WritableComparable;
+import org.apache.log4j.Logger;
+import org.apache.log4j.spi.LoggerFactory;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.Set;
 
 /**
@@ -20,6 +21,7 @@ import java.util.Set;
  */
 public class TableSchemaDemo1 {
 
+    private static Logger logger = Logger.getLogger(TableSchemaDemo1.class);
     /**
      * 表名
      */
@@ -37,6 +39,8 @@ public class TableSchemaDemo1 {
              Admin admin = connection.getAdmin()) {
             // 建表
 //            createSchemaTables(admin);
+            // 建表（16位键预分区）
+            createTable(admin, getHexSplits("0000000000000000", "ffffffffffffffff", 10));
             // 修改表结构（列族和版本）
 //            modifySchema(admin);
             // 查看表结构
@@ -46,7 +50,6 @@ public class TableSchemaDemo1 {
             // 删表
 //            dropTable(admin, TABLE_NAME);
         }
-
     }
 
     private static void dropTable(Admin admin, String tableName) throws IOException {
@@ -127,7 +130,7 @@ public class TableSchemaDemo1 {
                 .setCompressionType(Compression.Algorithm.NONE));
         // 预设 region 数量 和 region 算法
         table.setRegionReplication(2);
-        table.setRegionSplitPolicyClassName(RegionSplitter.UniformSplit.class.getName());
+        table.setRegionSplitPolicyClassName(RegionSplitter.UniformSplit.class.toString());
 
         System.out.print("Creating table Start");
         // 如果表存在，先 disable 表，在 delete 表
@@ -138,6 +141,44 @@ public class TableSchemaDemo1 {
         // 实际的创建表函数
         admin.createTable(table);
         System.out.println("Create table Done");
+    }
+
+    /**
+     * 以下case说明了如何16位键预分区
+     *
+     * @param admin
+     * @param splits
+     * @return
+     * @throws IOException
+     */
+    public static boolean createTable(Admin admin, byte[][] splits)
+            throws IOException {
+        HTableDescriptor table = new HTableDescriptor(TableName.valueOf(TABLE_NAME));
+        table.addFamily(new HColumnDescriptor(CF_DEFAULT));
+        try {
+            admin.createTable(table, splits);
+            return true;
+        } catch (TableExistsException e) {
+            logger.info("table " + table.getNameAsString() + " already exists");
+            // the table already exists...
+            return false;
+        }
+    }
+
+    public static byte[][] getHexSplits(String startKey, String endKey, int numRegions) {
+        byte[][] splits = new byte[numRegions - 1][];
+        BigInteger lowestKey = new BigInteger(startKey, 16);
+        BigInteger highestKey = new BigInteger(endKey, 16);
+        BigInteger range = highestKey.subtract(lowestKey);
+        BigInteger regionIncrement = range.divide(BigInteger.valueOf(numRegions));
+        lowestKey = lowestKey.add(regionIncrement);
+        for (int i = 0; i < numRegions - 1; i++) {
+            BigInteger key = lowestKey.add(regionIncrement.multiply(BigInteger.valueOf(i)));
+            byte[] b = String.format("%016x", key).getBytes();
+            System.out.println(String.format("%016x", key));
+            splits[i] = b;
+        }
+        return splits;
     }
 
 }
