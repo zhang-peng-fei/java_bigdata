@@ -20,7 +20,7 @@
         <java.version>1.8</java.version>
         <scala.binary.version>2.11</scala.binary.version>
         <flink.version>1.9.0</flink.version>
-        <hadoop.version>2.7.5</hadoop.version>
+        <hadoop.version>3.2.3</hadoop.version>
         <storm.version>1.2.3</storm.version>
         <hbase.version>1.2.0</hbase.version>
         <kafka.version>0.10.2.2</kafka.version>
